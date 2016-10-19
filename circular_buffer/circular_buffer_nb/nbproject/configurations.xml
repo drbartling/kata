@@ -47,6 +47,9 @@
             <pElem>../test</pElem>
             <pElem>../../../Unity/src</pElem>
           </incDir>
+          <preprocessorList>
+            <Elem>TEST</Elem>
+          </preprocessorList>
         </cTool>
       </compileType>
       <item path="../../../Unity/src/unity.c" ex="false" tool="0" flavor2="0">

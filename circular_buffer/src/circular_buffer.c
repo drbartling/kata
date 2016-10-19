@@ -12,11 +12,19 @@
 // Section: Constants
 //
 
+#ifdef TEST
+#    define STATIC
+#else
+#    define STATIC static
+#endif
+
 //
 // Section: Global Variable Declarations
 //
 
-static CBF_DATA_T CBF_data;
+STATIC CBF_DATA_T CBF_data[1412];
+STATIC int8_t CBF_writeIndex;
+STATIC int8_t CBF_readIndex;
 
 //
 // Section: Macros
@@ -35,12 +43,12 @@ static CBF_DATA_T CBF_data;
 //
 
 CBF_ERROR_T CBF_BufferGet(CBF_DATA_T *dataOut) {
-    *dataOut = CBF_data;
+    *dataOut = CBF_data[CBF_readIndex++];
     return CBF_SUCCESS;
 }
 
 CBF_ERROR_T CBF_BufferPut(CBF_DATA_T dataIn) {
-    CBF_data = dataIn;
+    CBF_data[CBF_writeIndex++] = dataIn;
     return CBF_SUCCESS;
 }
 

@@ -67,17 +67,17 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/circular_buffer_nb.exe: ${OBJECTFILES
 ${OBJECTDIR}/_ext/18f4303b/unity.o: ../../../Unity/src/unity.c 
 	${MKDIR} -p ${OBJECTDIR}/_ext/18f4303b
 	${RM} "$@.d"
-	$(COMPILE.c) -g -I../inc -I../src -I../test -I../../../Unity/src -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/18f4303b/unity.o ../../../Unity/src/unity.c
+	$(COMPILE.c) -g -DTEST -I../inc -I../src -I../test -I../../../Unity/src -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/18f4303b/unity.o ../../../Unity/src/unity.c
 
 ${OBJECTDIR}/_ext/511e4115/circular_buffer.o: ../src/circular_buffer.c 
 	${MKDIR} -p ${OBJECTDIR}/_ext/511e4115
 	${RM} "$@.d"
-	$(COMPILE.c) -g -I../inc -I../src -I../test -I../../../Unity/src -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/511e4115/circular_buffer.o ../src/circular_buffer.c
+	$(COMPILE.c) -g -DTEST -I../inc -I../src -I../test -I../../../Unity/src -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/511e4115/circular_buffer.o ../src/circular_buffer.c
 
 ${OBJECTDIR}/_ext/d2aa2781/test_circular_buffer.o: ../test/test_circular_buffer.c 
 	${MKDIR} -p ${OBJECTDIR}/_ext/d2aa2781
 	${RM} "$@.d"
-	$(COMPILE.c) -g -I../inc -I../src -I../test -I../../../Unity/src -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d2aa2781/test_circular_buffer.o ../test/test_circular_buffer.c
+	$(COMPILE.c) -g -DTEST -I../inc -I../src -I../test -I../../../Unity/src -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d2aa2781/test_circular_buffer.o ../test/test_circular_buffer.c
 
 # Subprojects
 .build-subprojects:
