@@ -16,6 +16,8 @@
 // Section: Global Variable Declarations
 //
 
+static CBF_DATA_T CBF_data;
+
 //
 // Section: Macros
 //
@@ -33,10 +35,12 @@
 //
 
 CBF_ERROR_T CBF_BufferGet(CBF_DATA_T *dataOut) {
+    *dataOut = CBF_data;
     return CBF_SUCCESS;
 }
 
 CBF_ERROR_T CBF_BufferPut(CBF_DATA_T dataIn) {
+    CBF_data = dataIn;
     return CBF_SUCCESS;
 }
 
