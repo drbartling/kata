@@ -69,32 +69,47 @@ GREEN=setaf 2
 RED=setaf 1
 YELLOW=setaf 3
 
-OUTPUT_FAIL = $(RED); echo FAIL; $(NO_COLOR);
-OUTPUT_PASS = $(GREEN); echo OKAY; $(NO_COLOR);
-
 # Default only shows failed and ignored tests + summary
 default: $(PATHB) $(TGT)
 	./$(TGT) > $(RESULTS); true
 	@echo 
 	@echo ----Ignored------------------------
 	@grep -s -E '.IGNORE' ./$(RESULTS); true
+	@echo
 	@echo ----Failed-------------------------
 	@grep -s -E '.FAIL' ./$(RESULTS); true
+	@echo
 	@echo -----------------------------------
 	@grep -s Ignored ./$(RESULTS)
 	@if grep -q FAIL ./$(RESULTS); \
-	then tput $(RED); echo FAIL; tput $(NO_COLOR); \
-	else tput $(GREEN); echo PASS; tput $(NO_COLOR); \
+	then tput $(RED);   echo ==============FAIL==============; tput $(NO_COLOR); \
+	else tput $(GREEN); echo ==============PASS==============; tput $(NO_COLOR); \
 	fi
 
 # Use make test to show all test results
 test: $(PATHB) $(TGT)
-	./$(TGT) | tee $(RESULTS)
+	./$(TGT) > $(RESULTS); true
+	@echo
+	@echo ----Passed--------------------------
+	@grep -s -E '.PASS' ./$(RESULTS); true
+	@echo
+	@echo ----Ignored-------------------------
+	@grep -s -E '.IGNORE' ./$(RESULTS); true
+	@echo
+	@echo ----Failed--------------------------
+	@grep -s -E '.FAIL' ./$(RESULTS); true
+	@echo
+	@echo ------------------------------------
+	@grep -s Ignored ./$(RESULTS)
+	@if grep -q FAIL ./$(RESULTS); \
+	then tput $(RED);   echo ==============FAIL==============; tput $(NO_COLOR); \
+	else tput $(GREEN); echo ==============PASS==============; tput $(NO_COLOR); \
+	fi
 
 clean:
 	$(CLEANUP) $(PATHB)*.o
 	$(CLEANUP) $(TGT)
-	
+
 all: clean default
 
 $(PATHB)%.o:: $(PATHS)%.c $(DEP)
