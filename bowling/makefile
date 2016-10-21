@@ -1,11 +1,21 @@
+# ==========================================
+#   Unity Project - A Test Framework for C
+#   Copyright (c) 2007 Mike Karlesky, Mark VanderVoord, Greg Williams
+#   [Released under MIT License. Please refer to license.txt for details]
+# ==========================================
+
 #We try to detect the OS we are running on, and adjust commands as needed
 ifeq ($(OSTYPE),cygwin)
 	CLEANUP = rm -f
 	MKDIR = mkdir -p
 	TARGET_EXTENSION=.out
-else ifeq ($(OS),Windows_NT)
+elseifeq ($(OSTYPE),msys)
 	CLEANUP = rm -f
 	MKDIR = mkdir -p
+	TARGET_EXTENSION=.exe
+elseifeq ($(OS),Windows_NT)
+	CLEANUP = del /F /Q
+	MKDIR = mkdir
 	TARGET_EXTENSION=.exe
 else
 	CLEANUP = rm -f
@@ -14,7 +24,7 @@ else
 endif
 
 #Path Definitions
-PATHU = ../Unity/src/
+PATHU = ../../Unity/src/
 PATHS = src/
 PATHI = inc/
 PATHT = test/
@@ -23,7 +33,7 @@ PATHB = build/
 #determine our source files
 SRCU = $(PATHU)unity.c
 SRCS = $(wildcard $(PATHS)*.c)
-SRSI = $(wildcard $(PATHI)*.c
+SRSI = $(wildcard $(PATHI)*.c)
 SRCT = $(wildcard $(PATHT)*.c)
 SRC = $(SRCU) $(SRCS) $(SRCI) $(SRCT)
 
@@ -35,40 +45,50 @@ OBJT = $(patsubst $(PATHT)%.c,$(PATHB)%.o,$(SRCT))
 OBJ = $(OBJU) $(OBJS) $(OBJI) $(OBJT)
 
 #Other files we care about
-DEP = $(PATHU)unity.h $(PATHU)unity_internals.h
-TGT = $(PATHB)test$(TARGET_EXTENSION)
+DEP  = $(PATHU)unity.h
+DEP += $(PATHU)unity_internals.h
+TGT  = $(PATHB)test$(TARGET_EXTENSION)
 
 #Tool Definitions
-CC=gcc
-CFLAGS=-I. -I$(PATHU) -I$(PATHS) -I$(PATHI) -DTEST
+C_COMPILER = gcc
+CFLAGS  = -std=c99
+CFLAGS += -D TEST
 
+INC_DIRS  = -I .
+INC_DIRS += -I $(PATHU)
+INC_DIRS += -I $(PATHS) 
+INC_DIRS += -I $(PATHI) 
+
+COMPILE = $(C_COMPILER) -c $(CFLAGS) $(INC_DIRS) $< -o $@
+
+all: clean default
+
+# Default only shows failed and ignored tests + summary
+default: $(PATHB) $(TGT)
+	./$(TGT) | grep -E 'FAIL|IGNORE|---|Tests'
+
+# Use make test to show all test results
 test: $(PATHB) $(TGT)
 	./$(TGT)
-
-$(PATHB)%.o:: $(PATHS)%.c $(DEP)
-	$(CC) -c $(CFLAGS) $< -o $@
-
-$(PATHB)%.o:: $(PATHI)%.c $(DEP)
-	$(CC) -c $(CFLAGI) $< -o $@
-
-$(PATHB)%.o:: $(PATHT)%.c $(DEP)
-	$(CC) -c $(CFLAGS) $< -o $@
-
-$(PATHB)%.o:: $(PATHU)%.c $(DEP)
-	$(CC) -c $(CFLAGS) $< -o $@
-
-$(TGT): $(OBJ)
-	gcc -o $@ $^
 
 clean:
 	$(CLEANUP) $(PATHB)*.o
 	$(CLEANUP) $(TGT)
 
+$(PATHB)%.o:: $(PATHS)%.c $(DEP)
+	$(COMPILE)
+
+$(PATHB)%.o:: $(PATHI)%.c $(DEP)
+	$(COMPILE)
+
+$(PATHB)%.o:: $(PATHT)%.c $(DEP)
+	$(COMPILE)
+
+$(PATHB)%.o:: $(PATHU)%.c $(DEP)
+	$(COMPILE)
+
+$(TGT): $(OBJ)
+	$(C_COMPILER) -o $@ $^
+
 $(PATHB):
 	$(MKDIR) $(PATHB)
-
-all: clean test
-
-.PHONY: all
-.PHONY: clean
-.PHONY: test
