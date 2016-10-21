@@ -69,42 +69,43 @@ GREEN=setaf 2
 RED=setaf 1
 YELLOW=setaf 3
 
-# Default only shows failed and ignored tests + summary
-default: $(PATHB) $(TGT)
-	./$(TGT) > $(RESULTS); true
-	@echo 
-	@echo ----Ignored------------------------
-	@grep -s -E '.IGNORE' ./$(RESULTS); true
-	@echo
-	@echo ----Failed-------------------------
-	@grep -s -E '.FAIL' ./$(RESULTS); true
-	@echo
-	@echo -----------------------------------
-	@grep -s Ignored ./$(RESULTS)
-	@if grep -q FAIL ./$(RESULTS); \
+PASSED_TESTS = echo; \
+	echo ----Passed--------------------------; \
+	grep -s -E '.PASS' ./$(RESULTS); true
+
+IGNORED_TESTS = echo; \
+	echo ----Ignored-------------------------; \
+	grep -s -E '.IGNORE' ./$(RESULTS); true
+
+FAILED_TESTS = echo; \
+	echo ----Failed--------------------------; \
+	grep -s -E '.FAIL' ./$(RESULTS); true
+
+RESULT_SUMMARY = echo; \
+	echo -----------------------------------; \
+	grep -s Ignored ./$(RESULTS)
+
+FINAL_RESULT = if grep -q FAIL ./$(RESULTS); \
 	then tput $(RED);   echo ==============FAIL==============; tput $(NO_COLOR); \
 	else tput $(GREEN); echo ==============PASS==============; tput $(NO_COLOR); \
 	fi
 
+# Default only shows failed and ignored tests + summary
+default: $(PATHB) $(TGT)
+	./$(TGT) > $(RESULTS); true
+	@$(IGNORED_TESTS)
+	@$(FAILED_TESTS)
+	@$(RESULT_SUMMARY)
+	@$(FINAL_RESULT)
+
 # Use make test to show all test results
 test: $(PATHB) $(TGT)
 	./$(TGT) > $(RESULTS); true
-	@echo
-	@echo ----Passed--------------------------
-	@grep -s -E '.PASS' ./$(RESULTS); true
-	@echo
-	@echo ----Ignored-------------------------
-	@grep -s -E '.IGNORE' ./$(RESULTS); true
-	@echo
-	@echo ----Failed--------------------------
-	@grep -s -E '.FAIL' ./$(RESULTS); true
-	@echo
-	@echo ------------------------------------
-	@grep -s Ignored ./$(RESULTS)
-	@if grep -q FAIL ./$(RESULTS); \
-	then tput $(RED);   echo ==============FAIL==============; tput $(NO_COLOR); \
-	else tput $(GREEN); echo ==============PASS==============; tput $(NO_COLOR); \
-	fi
+	@$(IGNORED_TESTS)
+	@$(PASSED_TESTS)
+	@$(FAILED_TESTS)
+	@$(RESULT_SUMMARY)
+	@$(FINAL_RESULT)
 
 clean:
 	$(CLEANUP) $(PATHB)*.o
