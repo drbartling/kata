@@ -63,8 +63,17 @@ COMPILE = $(C_COMPILER) -c $(CFLAGS) $(INC_DIRS) $< -o $@
 
 all: clean default
 
+# Default only shows failed and ignored tests + summary
 default: $(PATHB) $(TGT)
+	./$(TGT) | grep -E 'FAIL|IGNORE|---|Tests'
+
+# Use make test to show all test results
+test: $(PATHB) $(TGT)
 	./$(TGT)
+
+clean:
+	$(CLEANUP) $(PATHB)*.o
+	$(CLEANUP) $(TGT)
 
 $(PATHB)%.o:: $(PATHS)%.c $(DEP)
 	$(COMPILE)
@@ -80,10 +89,6 @@ $(PATHB)%.o:: $(PATHU)%.c $(DEP)
 
 $(TGT): $(OBJ)
 	$(C_COMPILER) -o $@ $^
-
-clean:
-	$(CLEANUP) $(PATHB)*.o
-	$(CLEANUP) $(TGT)
 
 $(PATHB):
 	$(MKDIR) $(PATHB)
