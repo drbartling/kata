@@ -48,6 +48,7 @@ OBJ = $(OBJU) $(OBJS) $(OBJI) $(OBJT)
 DEP  = $(PATHU)unity.h
 DEP += $(PATHU)unity_internals.h
 TGT  = $(PATHB)test$(TARGET_EXTENSION)
+RESULTS = $(PATHB)results.txt
 
 #Tool Definitions
 C_COMPILER = gcc
@@ -60,20 +61,41 @@ INC_DIRS += -I $(PATHS)
 INC_DIRS += -I $(PATHI) 
 
 COMPILE = $(C_COMPILER) -c $(CFLAGS) $(INC_DIRS) $< -o $@
+LINK = $(C_COMPILER) -o $@ $^
 
-all: clean default
+#Result formatting
+NO_COLOR=sgr0
+GREEN=setaf 2
+RED=setaf 1
+YELLOW=setaf 3
+
+OUTPUT_FAIL = $(RED); echo FAIL; $(NO_COLOR);
+OUTPUT_PASS = $(GREEN); echo OKAY; $(NO_COLOR);
 
 # Default only shows failed and ignored tests + summary
 default: $(PATHB) $(TGT)
-	./$(TGT) | grep -E 'FAIL|IGNORE|---|Tests'
+	./$(TGT) > $(RESULTS); true
+	@echo 
+	@echo ----Ignored------------------------
+	@grep -s -E '.IGNORE' ./$(RESULTS); true
+	@echo ----Failed-------------------------
+	@grep -s -E '.FAIL' ./$(RESULTS); true
+	@echo -----------------------------------
+	@grep -s Ignored ./$(RESULTS)
+	@if grep -q FAIL ./$(RESULTS); \
+	then tput $(RED); echo FAIL; tput $(NO_COLOR); \
+	else tput $(GREEN); echo PASS; tput $(NO_COLOR); \
+	fi
 
 # Use make test to show all test results
 test: $(PATHB) $(TGT)
-	./$(TGT)
+	./$(TGT) | tee $(RESULTS)
 
 clean:
 	$(CLEANUP) $(PATHB)*.o
 	$(CLEANUP) $(TGT)
+	
+all: clean default
 
 $(PATHB)%.o:: $(PATHS)%.c $(DEP)
 	$(COMPILE)
@@ -88,7 +110,7 @@ $(PATHB)%.o:: $(PATHU)%.c $(DEP)
 	$(COMPILE)
 
 $(TGT): $(OBJ)
-	$(C_COMPILER) -o $@ $^
+	$(LINK)
 
 $(PATHB):
 	$(MKDIR) $(PATHB)
