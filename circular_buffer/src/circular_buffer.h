@@ -13,6 +13,8 @@
 // Section: Constants
 //
 
+#    define CBF_BUFFER_SIZE (1412)
+
 //
 // Section: Data Types
 //
@@ -23,6 +25,7 @@ typedef enum {
     CBF_SUCCESS, ///< Everything worked great!!!
     CBF_ERROR, ///< unspecified error, contact maintainer
     CBF_UNDERFLOW, ///< Tried to read from an empty buffer
+    CBF_OVERFLOW, ///< Tried to write to a full buffer
 } CBF_ERROR_T;
 
 //
