@@ -1,10 +1,11 @@
-test/test_circular_buffer.c:82:test_BufferPut_should_ReturnSuccessWhenBufferIsNotFull:PASS
-test/test_circular_buffer.c:83:test_BufferGet_should_ReturnSuccess_when_BuffferIsNotEmpty:PASS
-test/test_circular_buffer.c:84:test_BufferGet_should_ReturnDataPutIntoBufferBy_BufferPut:PASS
-test/test_circular_buffer.c:85:test_BufferGet_should_ReturnDataPutIntoBufferBy_BufferPut_InOrder:PASS
-test/test_circular_buffer.c:86:test_BufferGet_should_ReturnUnderflow_when_ReadingFromAnEmptyBuffer:PASS
-test/test_circular_buffer.c:87:test_BufferPut_should_ReturnOverflow_when_WritingToAFullBuffer:PASS
+test/test_circular_buffer.c:93:test_BufferPut_should_ReturnSuccessWhenBufferIsNotFull:PASS
+test/test_circular_buffer.c:94:test_BufferGet_should_ReturnSuccess_when_BuffferIsNotEmpty:PASS
+test/test_circular_buffer.c:95:test_BufferGet_should_ReturnDataPutIntoBufferBy_BufferPut:PASS
+test/test_circular_buffer.c:96:test_BufferGet_should_ReturnDataPutIntoBufferBy_BufferPut_InOrder:PASS
+test/test_circular_buffer.c:97:test_BufferGet_should_ReturnUnderflow_when_ReadingFromAnEmptyBuffer:PASS
+test/test_circular_buffer.c:98:test_BufferPut_should_ReturnOverflow_when_WritingToAFullBuffer:PASS
+test/test_circular_buffer.c:99:test_BufferClear_should_MakeTheCircularBufferEmpty:PASS
 
 -----------------------
-6 Tests 0 Failures 0 Ignored 
+7 Tests 0 Failures 0 Ignored 
 OK

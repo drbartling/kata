@@ -61,6 +61,11 @@ inline static CBF_INDEX_T CBF_IndexIncrement(CBF_INDEX_T index) {
 // Section:  Module APIs
 //
 
+void CBF_BufferClear(void) {
+    CBF_writeIndex = 0;
+    CBF_readIndex = 0;
+}
+
 CBF_ERROR_T CBF_BufferGet(CBF_DATA_T *dataOut) {
     if (CBF_readIndex == CBF_writeIndex) {
         return CBF_UNDERFLOW;

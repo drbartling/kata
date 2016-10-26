@@ -32,9 +32,12 @@ typedef enum {
 // Section:  Module APIs
 //
 
+void CBF_BufferClear(void);
+
 CBF_ERROR_T CBF_BufferGet(CBF_DATA_T *dataOut);
 
 CBF_ERROR_T CBF_BufferPut(CBF_DATA_T dataIn);
+
 
 #endif
 
