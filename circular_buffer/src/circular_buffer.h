@@ -22,6 +22,7 @@ typedef int16_t CBF_DATA_T;
 typedef enum {
     CBF_SUCCESS, ///< Everything worked great!!!
     CBF_ERROR, ///< unspecified error, contact maintainer
+    CBF_UNDERFLOW, ///< Tried to read from an empty buffer
 } CBF_ERROR_T;
 
 //

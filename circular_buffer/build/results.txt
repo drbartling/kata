@@ -1,0 +1,9 @@
+test/test_circular_buffer.c:73:test_BufferPut_should_ReturnSuccessWhenBufferIsNotFull:PASS
+test/test_circular_buffer.c:74:test_BufferGet_should_ReturnSuccess_when_BuffferIsNotEmpty:PASS
+test/test_circular_buffer.c:75:test_BufferGet_should_ReturnDataPutIntoBufferBy_BufferPut:PASS
+test/test_circular_buffer.c:76:test_BufferGet_should_ReturnDataPutIntoBufferBy_BufferPut_InOrder:PASS
+test/test_circular_buffer.c:77:test_BufferGet_should_ReturnUnderflow_when_ReadingFromAnEmptyBuffer:PASS
+
+-----------------------
+5 Tests 0 Failures 0 Ignored 
+OK

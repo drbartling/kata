@@ -62,11 +62,18 @@ void test_BufferGet_should_ReturnDataPutIntoBufferBy_BufferPut_InOrder(void) {
     TEST_ASSERT_EQUAL_INT16_ARRAY(dataIn, dataOut, ArrayLength(dataIn));
 }
 
+void test_BufferGet_should_ReturnUnderflow_when_ReadingFromAnEmptyBuffer(void) {
+    CBF_DATA_T dataOut = 0;
+    TEST_ASSERT_EQUAL_MESSAGE(CBF_UNDERFLOW, CBF_BufferGet(&dataOut),
+            "Expected CBF_UNDERFLOW");
+}
+
 int main(void) {
     UNITY_BEGIN();
     RUN_TEST(test_BufferPut_should_ReturnSuccessWhenBufferIsNotFull);
     RUN_TEST(test_BufferGet_should_ReturnSuccess_when_BuffferIsNotEmpty);
     RUN_TEST(test_BufferGet_should_ReturnDataPutIntoBufferBy_BufferPut);
     RUN_TEST(test_BufferGet_should_ReturnDataPutIntoBufferBy_BufferPut_InOrder);
+    RUN_TEST(test_BufferGet_should_ReturnUnderflow_when_ReadingFromAnEmptyBuffer);
     return UNITY_END();
 }
