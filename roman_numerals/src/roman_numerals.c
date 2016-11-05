@@ -37,28 +37,33 @@ static inline void RN_StringTerminate(char str[], int i);
 //
 // Section: Static Function Definitions
 //
+
 static inline int RN_AppendNine(char str[], int magnitude, int i)
 {
     str[i++] = RN_numerals[magnitude * 2];
     str[i++] = RN_numerals[magnitude * 2 + 2];
     return i;
 }
+
 static inline int RN_AppendFive(char str[], int magnitude, int i)
 {
     str[i++] = RN_numerals[magnitude * 2 + 1];
     return i;
 }
+
 static inline int RN_AppendFour(char str[], int magnitude, int i)
 {
     str[i++] = RN_numerals[magnitude * 2];
     str[i++] = RN_numerals[magnitude * 2 + 1];
     return i;
 }
+
 static inline int RN_AppendOne(char str[], int magnitude, int i)
 {
     str[i++] = RN_numerals[magnitude * 2];
     return i;
 }
+
 static inline void RN_StringTerminate(char str[], int i)
 {
     str[i] = 0;
