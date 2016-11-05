@@ -4,13 +4,17 @@
 //
 
 #include <assert.h>
+#include <math.h>
 #include <stdbool.h>
 #include <stdint.h>
+#include <stdio.h>
 #include "roman_numerals.h"
 
 //
 // Section: Constants
 //
+
+static const char RN_numerals[] = "IVX";
 
 //
 // Section: Global Variable Declarations
@@ -24,41 +28,70 @@
 // Section: Static Function Prototypes
 //
 
+static inline int RN_AppendNine(char str[], int magnitude, int i);
+static inline int RN_AppendFive(char str[], int magnitude, int i);
+static inline int RN_AppendFour(char str[], int magnitude, int i);
+static inline int RN_AppendOne(char str[], int magnitude, int i);
+
 //
 // Section: Static Function Definitions
 //
+static inline int RN_AppendNine(char str[], int magnitude, int i)
+{
+    str[i++] = 'I';
+    str[i++] = 'X';
+    return i;
+}
+static inline int RN_AppendFive(char str[], int magnitude, int i)
+{
+    str[i++] = 'V';
+    return i;
+}
+static inline int RN_AppendFour(char str[], int magnitude, int i)
+{
+    str[i++] = 'I';
+    str[i++] = 'V';
+    return i;
+}
+static inline int RN_AppendOne(char str[], int magnitude, int i)
+{
+    str[i++] = 'I';
+    return i;
+}
 
 //
 // Section:  Module APIs
 //
 void RN_IntToRoman(int num, char str[])
 {
+    int index = 0;
     while (num)
     {
-        if (9 == num)
+        int magnitude = floor(log10(num));
+        int scaler    = pow(10, magnitude);
+        int digit     = num / scaler;
+        if (9 == digit)
         {
-            *str++ = 'I';
-            *str++ = 'X';
+            index = RN_AppendNine(str, magnitude, index);
             num -= 9;
         }
-        else if (5 <= num)
+        else if (5 <= digit)
         {
-            *str++ = 'V';
+            index = RN_AppendFive(str, magnitude, index);
             num -= 5;
         }
-        else if (4 == num)
+        else if (4 == digit)
         {
-            *str++ = 'I';
-            *str++ = 'V';
+            index = RN_AppendFour(str, magnitude, index);
             num -= 4;
         }
         else
         {
-            *str++ = 'I';
-            num--;
+            index = RN_AppendOne(str, magnitude, index);
+            num -= 1;
         }
     }
-    *str = 0;
+    str[index] = 0;
 }
 
 //
