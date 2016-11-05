@@ -1,9 +1,10 @@
-test/test_roman_numerals.c:58:test_IntToRoman_should_return_EmptyString_when_numIsZero:PASS
-test/test_roman_numerals.c:59:test_IntToRoman_should_return_Is_when_NumIsOneToThree:PASS
-test/test_roman_numerals.c:60:test_IntToRoman_should_return_IV_when_NumIsFour:PASS
-test/test_roman_numerals.c:61:test_IntToRoman_should_return_V_when_NumIsFive:PASS
-test/test_roman_numerals.c:62:test_IntToRoman_should_return_VIs_when_NumIsSixToEight:PASS
+test/test_roman_numerals.c:64:test_IntToRoman_should_return_EmptyString_when_numIsZero:PASS
+test/test_roman_numerals.c:65:test_IntToRoman_should_return_Is_when_NumIsOneToThree:PASS
+test/test_roman_numerals.c:66:test_IntToRoman_should_return_IV_when_NumIsFour:PASS
+test/test_roman_numerals.c:67:test_IntToRoman_should_return_V_when_NumIsFive:PASS
+test/test_roman_numerals.c:68:test_IntToRoman_should_return_VIs_when_NumIsSixToEight:PASS
+test/test_roman_numerals.c:69:test_IntToRoman_should_return_IX_when_NumIsNine:PASS
 
 -----------------------
-5 Tests 0 Failures 0 Ignored 
+6 Tests 0 Failures 0 Ignored 
 OK
