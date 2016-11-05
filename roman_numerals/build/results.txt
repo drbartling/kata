@@ -1,6 +1,7 @@
-test/test_roman_numerals.c:36:test_IntToRoman_should_returnEmptyString_when_numIsZero:PASS
-test/test_roman_numerals.c:37:test_IntToRoman_should_return_Is_when_NumIsOneToThree:PASS
+test/test_roman_numerals.c:42:test_IntToRoman_should_return_EmptyString_when_numIsZero:PASS
+test/test_roman_numerals.c:43:test_IntToRoman_should_return_Is_when_NumIsOneToThree:PASS
+test/test_roman_numerals.c:44:test_IntToRoman_should_return_IV_when_NumIsFour:PASS
 
 -----------------------
-2 Tests 0 Failures 0 Ignored 
+3 Tests 0 Failures 0 Ignored 
 OK

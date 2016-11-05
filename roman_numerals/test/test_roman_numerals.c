@@ -14,7 +14,7 @@ void tearDown(void)
 {
 }
 
-void test_IntToRoman_should_returnEmptyString_when_numIsZero(void)
+void test_IntToRoman_should_return_EmptyString_when_numIsZero(void)
 {
     RN_IntToRoman(0, str);
     TEST_ASSERT_EQUAL_STRING("", str);
@@ -30,10 +30,17 @@ void test_IntToRoman_should_return_Is_when_NumIsOneToThree(void)
     TEST_ASSERT_EQUAL_STRING("III", str);
 }
 
+void test_IntToRoman_should_return_IV_when_NumIsFour(void)
+{
+    RN_IntToRoman(4, str);
+    TEST_ASSERT_EQUAL_STRING("IV", str);
+}
+
 int main(void)
 {
     UNITY_BEGIN();
-    RUN_TEST(test_IntToRoman_should_returnEmptyString_when_numIsZero);
+    RUN_TEST(test_IntToRoman_should_return_EmptyString_when_numIsZero);
     RUN_TEST(test_IntToRoman_should_return_Is_when_NumIsOneToThree);
+    RUN_TEST(test_IntToRoman_should_return_IV_when_NumIsFour);
     return UNITY_END();
 }

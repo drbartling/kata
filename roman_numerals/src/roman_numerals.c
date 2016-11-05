@@ -33,9 +33,19 @@
 //
 void RN_IntToRoman(int num, char str[])
 {
-    while (num--)
+    while (num)
     {
-        *str++ = 'I';
+        if (4 == num)
+        {
+            *str++ = 'I';
+            *str++ = 'V';
+            num -= 4;
+        }
+        else
+        {
+            *str++ = 'I';
+            num--;
+        }
     }
     *str = 0;
 }
