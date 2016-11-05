@@ -1,0 +1,7 @@
+test/test_template.c:41:test_IntToRoman_should_returnEmptyString_when_numIsZero:PASS
+test/test_template.c:42:test_IntToRoman_should_return_Is_when_NumIsOneToThree:PASS
+test/test_template.c:43:test_IntToRoman_should_return_IV_when_NumIsFour:PASS
+
+-----------------------
+3 Tests 0 Failures 0 Ignored 
+OK
