@@ -33,6 +33,10 @@
 //
 void RN_IntToRoman(int num, char str[])
 {
+    while (num--)
+    {
+        *str++ = 'I';
+    }
     *str = 0;
 }
 
