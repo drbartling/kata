@@ -76,9 +76,10 @@ void test_IntToRoman_TensPlace(void)
 
 void test_IntToRoman_Acceptance(void)
 {
-    TEST_IGNORE();
     RN_IntToRoman(1984, str);
     TEST_ASSERT_EQUAL_STRING("MCMLXXXIV", str);
+    RN_IntToRoman(3999, str);
+    TEST_ASSERT_EQUAL_STRING("MMMCMXCIX", str);
 }
 
 int main(void)
