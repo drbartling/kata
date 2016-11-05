@@ -14,7 +14,7 @@
 // Section: Constants
 //
 
-static const char RN_numerals[] = "IVX";
+static const char RN_numerals[] = "IVXLCDM";
 
 //
 // Section: Global Variable Declarations
@@ -38,24 +38,24 @@ static inline int RN_AppendOne(char str[], int magnitude, int i);
 //
 static inline int RN_AppendNine(char str[], int magnitude, int i)
 {
-    str[i++] = RN_numerals[0];
-    str[i++] = RN_numerals[0 + 2];
+    str[i++] = RN_numerals[magnitude * 2];
+    str[i++] = RN_numerals[magnitude * 2 + 2];
     return i;
 }
 static inline int RN_AppendFive(char str[], int magnitude, int i)
 {
-    str[i++] = RN_numerals[1];
+    str[i++] = RN_numerals[magnitude * 2 + 1];
     return i;
 }
 static inline int RN_AppendFour(char str[], int magnitude, int i)
 {
-    str[i++] = RN_numerals[0];
-    str[i++] = RN_numerals[0 + 1];
+    str[i++] = RN_numerals[magnitude * 2];
+    str[i++] = RN_numerals[magnitude * 2 + 1];
     return i;
 }
 static inline int RN_AppendOne(char str[], int magnitude, int i)
 {
-    str[i++] = RN_numerals[0];
+    str[i++] = RN_numerals[magnitude * 2];
     return i;
 }
 
@@ -73,22 +73,22 @@ void RN_IntToRoman(int num, char str[])
         if (9 == digit)
         {
             index = RN_AppendNine(str, magnitude, index);
-            num -= 9;
+            num -= 9 * scaler;
         }
         else if (5 <= digit)
         {
             index = RN_AppendFive(str, magnitude, index);
-            num -= 5;
+            num -= 5 * scaler;
         }
         else if (4 == digit)
         {
             index = RN_AppendFour(str, magnitude, index);
-            num -= 4;
+            num -= 4 * scaler;
         }
         else
         {
             index = RN_AppendOne(str, magnitude, index);
-            num -= 1;
+            num -= 1 * scaler;
         }
     }
     str[index] = 0;

@@ -58,6 +58,29 @@ void test_IntToRoman_should_return_IX_when_NumIsNine(void)
     TEST_ASSERT_EQUAL_STRING("IX", str);
 }
 
+void test_IntToRoman_TensPlace(void)
+{
+    RN_IntToRoman(10, str);
+    TEST_ASSERT_EQUAL_STRING("X", str);
+    RN_IntToRoman(30, str);
+    TEST_ASSERT_EQUAL_STRING("XXX", str);
+    RN_IntToRoman(40, str);
+    TEST_ASSERT_EQUAL_STRING("XL", str);
+    RN_IntToRoman(50, str);
+    TEST_ASSERT_EQUAL_STRING("L", str);
+    RN_IntToRoman(70, str);
+    TEST_ASSERT_EQUAL_STRING("LXX", str);
+    RN_IntToRoman(90, str);
+    TEST_ASSERT_EQUAL_STRING("XC", str);
+}
+
+void test_IntToRoman_Acceptance(void)
+{
+    TEST_IGNORE();
+    RN_IntToRoman(1984, str);
+    TEST_ASSERT_EQUAL_STRING("MCMLXXXIV", str);
+}
+
 int main(void)
 {
     UNITY_BEGIN();
@@ -67,5 +90,7 @@ int main(void)
     RUN_TEST(test_IntToRoman_should_return_V_when_NumIsFive);
     RUN_TEST(test_IntToRoman_should_return_VIs_when_NumIsSixToEight);
     RUN_TEST(test_IntToRoman_should_return_IX_when_NumIsNine);
+    RUN_TEST(test_IntToRoman_TensPlace);
+    RUN_TEST(test_IntToRoman_Acceptance);
     return UNITY_END();
 }
