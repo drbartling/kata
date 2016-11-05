@@ -71,7 +71,7 @@ void RN_IntToRoman(int num, char str[])
 {
     int index = 0;
 
-    if (4000 <= num)
+    if (RN_MAX < num)
     {
         RN_StringTerminate(str, index);
         return;

@@ -13,6 +13,9 @@
 // Section: Constants
 //
 
+/// Largest value that can be represented as a roman numeral
+#define RN_MAX (3999)
+
 //
 // Section: Data Types
 //
