@@ -35,7 +35,7 @@ void RN_IntToRoman(int num, char str[])
 {
     while (num)
     {
-        if (5 == num)
+        if (5 <= num)
         {
             *str++ = 'V';
             num -= 5;

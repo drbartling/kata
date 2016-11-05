@@ -44,7 +44,12 @@ void test_IntToRoman_should_return_V_when_NumIsFive(void)
 
 void test_IntToRoman_should_return_VIs_when_NumIsSixToEight(void)
 {
-
+    RN_IntToRoman(6, str);
+    TEST_ASSERT_EQUAL_STRING("VI", str);
+    RN_IntToRoman(7, str);
+    TEST_ASSERT_EQUAL_STRING("VII", str);
+    RN_IntToRoman(8, str);
+    TEST_ASSERT_EQUAL_STRING("VIII", str);
 }
 
 int main(void)
@@ -54,5 +59,6 @@ int main(void)
     RUN_TEST(test_IntToRoman_should_return_Is_when_NumIsOneToThree);
     RUN_TEST(test_IntToRoman_should_return_IV_when_NumIsFour);
     RUN_TEST(test_IntToRoman_should_return_V_when_NumIsFive);
+    RUN_TEST(test_IntToRoman_should_return_VIs_when_NumIsSixToEight);
     return UNITY_END();
 }
