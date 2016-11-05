@@ -38,24 +38,24 @@ static inline int RN_AppendOne(char str[], int magnitude, int i);
 //
 static inline int RN_AppendNine(char str[], int magnitude, int i)
 {
-    str[i++] = 'I';
-    str[i++] = 'X';
+    str[i++] = RN_numerals[0];
+    str[i++] = RN_numerals[0 + 2];
     return i;
 }
 static inline int RN_AppendFive(char str[], int magnitude, int i)
 {
-    str[i++] = 'V';
+    str[i++] = RN_numerals[1];
     return i;
 }
 static inline int RN_AppendFour(char str[], int magnitude, int i)
 {
-    str[i++] = 'I';
-    str[i++] = 'V';
+    str[i++] = RN_numerals[0];
+    str[i++] = RN_numerals[0 + 1];
     return i;
 }
 static inline int RN_AppendOne(char str[], int magnitude, int i)
 {
-    str[i++] = 'I';
+    str[i++] = RN_numerals[0];
     return i;
 }
 
