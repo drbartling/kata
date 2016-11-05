@@ -90,6 +90,14 @@ void test_IntToRoman_should_ReturnEmptyString_when_numIs4000OrMore(void)
     TEST_ASSERT_EQUAL_STRING("", str);
 }
 
+void test_IntToRoman_should_ReturnEmptyString_when_numIsNegative(void)
+{
+    RN_IntToRoman(-1, str);
+    TEST_ASSERT_EQUAL_STRING("", str);
+    RN_IntToRoman(INT16_MIN, str);
+    TEST_ASSERT_EQUAL_STRING("", str);
+}
+
 int main(void)
 {
     UNITY_BEGIN();
@@ -102,5 +110,6 @@ int main(void)
     RUN_TEST(test_IntToRoman_TensPlace);
     RUN_TEST(test_IntToRoman_Acceptance);
     RUN_TEST(test_IntToRoman_should_ReturnEmptyString_when_numIs4000OrMore);
+    RUN_TEST(test_IntToRoman_should_ReturnEmptyString_when_numIsNegative);
     return UNITY_END();
 }

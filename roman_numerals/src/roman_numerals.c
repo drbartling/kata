@@ -77,7 +77,7 @@ void RN_IntToRoman(int num, char str[])
         return;
     }
 
-    while (num)
+    while (0 < num)
     {
         int magnitude = floor(log10(num));
         int scaler    = pow(10, magnitude);
