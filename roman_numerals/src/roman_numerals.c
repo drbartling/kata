@@ -32,6 +32,7 @@ static inline int RN_AppendNine(char str[], int magnitude, int i);
 static inline int RN_AppendFive(char str[], int magnitude, int i);
 static inline int RN_AppendFour(char str[], int magnitude, int i);
 static inline int RN_AppendOne(char str[], int magnitude, int i);
+static inline void RN_StringTerminate(char str[], int i);
 
 //
 // Section: Static Function Definitions
@@ -58,6 +59,10 @@ static inline int RN_AppendOne(char str[], int magnitude, int i)
     str[i++] = RN_numerals[magnitude * 2];
     return i;
 }
+static inline void RN_StringTerminate(char str[], int i)
+{
+    str[i] = 0;
+}
 
 //
 // Section:  Module APIs
@@ -68,7 +73,7 @@ void RN_IntToRoman(int num, char str[])
 
     if (4000 <= num)
     {
-        str[index] = 0;
+        RN_StringTerminate(str, index);
         return;
     }
 
@@ -98,7 +103,7 @@ void RN_IntToRoman(int num, char str[])
             num -= 1 * scaler;
         }
     }
-    str[index] = 0;
+    RN_StringTerminate(str, index);
 }
 
 //
