@@ -65,6 +65,13 @@ static inline int RN_AppendOne(char str[], int magnitude, int i)
 void RN_IntToRoman(int num, char str[])
 {
     int index = 0;
+
+    if (4000 <= num)
+    {
+        str[index] = 0;
+        return;
+    }
+
     while (num)
     {
         int magnitude = floor(log10(num));

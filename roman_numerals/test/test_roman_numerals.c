@@ -3,7 +3,7 @@
 #include "roman_numerals.h"
 #include "unity.h"
 
-static char str[30];
+static char str[3000];
 
 void setUp(void)
 {
@@ -82,6 +82,14 @@ void test_IntToRoman_Acceptance(void)
     TEST_ASSERT_EQUAL_STRING("MMMCMXCIX", str);
 }
 
+void test_IntToRoman_should_ReturnEmptyString_when_numIs4000OrMore(void)
+{
+    RN_IntToRoman(4000, str);
+    TEST_ASSERT_EQUAL_STRING("", str);
+    RN_IntToRoman(INT16_MAX, str);
+    TEST_ASSERT_EQUAL_STRING("", str);
+}
+
 int main(void)
 {
     UNITY_BEGIN();
@@ -93,5 +101,6 @@ int main(void)
     RUN_TEST(test_IntToRoman_should_return_IX_when_NumIsNine);
     RUN_TEST(test_IntToRoman_TensPlace);
     RUN_TEST(test_IntToRoman_Acceptance);
+    RUN_TEST(test_IntToRoman_should_ReturnEmptyString_when_numIs4000OrMore);
     return UNITY_END();
 }
