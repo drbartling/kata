@@ -50,9 +50,15 @@ _CBF_BufferNew(size_t typeSize, size_t count)
     return newBuffer;
 }
 
-void* CBF_BufferPtrGet(CBF_BUFFER_T circBuffer)
+void CBF_BufferDelete(CBF_BUFFER_T circularBuffer)
 {
-    return circBuffer->buffer;
+    free(circularBuffer->buffer);
+    free(circularBuffer);
+}
+
+void* CBF_BufferPtrGet(CBF_BUFFER_T circularBuffer)
+{
+    return circularBuffer->buffer;
 }
 
 //

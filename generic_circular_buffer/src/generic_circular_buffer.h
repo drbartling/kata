@@ -31,6 +31,7 @@ typedef struct CBF_BUFFER_S* CBF_BUFFER_T;
 //
 
 CBF_BUFFER_T _CBF_BufferNew(size_t typeSize, size_t count);
+void CBF_BufferDelete(CBF_BUFFER_T);
 void* CBF_BufferPtrGet(CBF_BUFFER_T buffer);
 
 #endif
