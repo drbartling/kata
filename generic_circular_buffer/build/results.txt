@@ -1,5 +1,6 @@
-test/test_generic_circular_buffer.c:22:test_BufferNew_Returns_PointerToBuffer:PASS
+test/test_generic_circular_buffer.c:29:test_BufferNew_Returns_PointerToBufferStruct:PASS
+test/test_generic_circular_buffer.c:30:test_BufferNew_Should_CreatePointerToBuffer:PASS
 
 -----------------------
-1 Tests 0 Failures 0 Ignored 
+2 Tests 0 Failures 0 Ignored 
 OK

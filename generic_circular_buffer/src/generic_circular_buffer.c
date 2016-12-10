@@ -19,7 +19,7 @@
 
 struct CBF_BUFFER_S
 {
-    int foo;
+    void* buffer;
 };
 
 //
@@ -43,10 +43,16 @@ struct CBF_BUFFER_S
 //
 
 CBF_BUFFER_T
-      _CBF_BufferNew(size_t typeSize, size_t count)
+_CBF_BufferNew(size_t typeSize, size_t count)
 {
     CBF_BUFFER_T newBuffer = malloc(sizeof(struct CBF_BUFFER_S));
+    newBuffer->buffer      = malloc(typeSize * count);
     return newBuffer;
+}
+
+void* CBF_BufferPtrGet(CBF_BUFFER_T circBuffer)
+{
+    return circBuffer->buffer;
 }
 
 //
