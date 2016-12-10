@@ -1,0 +1,34 @@
+Planned Tests
+
+CBF_New
+    Arguments
+        Element count
+        Type
+    Allocates structure
+    Allocates buffer
+    Returns pointer to structure
+    Returns null if can't allocate structure
+    Frees structure and returns null if can't allocate buffer
+
+CBF_Delete
+    No return
+    Should free all memory allocated by CBF_New
+    Takes pointer to CBF_BUFFER_T as argument
+
+CBF_BUFFER_T
+    Has
+        Pointer to buffer   Initialized to  0th element of buffer
+        Total Size                          (element count) * (type size)
+        Size of type                        <-- That
+        Pointer to read                     pointer to buffer
+        Pointer to write                    pointer to buffer
+
+CBF_ElementWrite
+    Adds an element to the buffer
+    Increments write pointer
+    Write pointer should wrap around when reaching the end of the buffer
+    Should return error when buffer is full
+
+
+CBF_ElementRead
+    Reads and removes (deques) an element from the buffer
