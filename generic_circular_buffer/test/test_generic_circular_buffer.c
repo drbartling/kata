@@ -2,27 +2,27 @@
 #include "generic_circular_buffer.h"
 #include "unity.h"
 
+static CBF_BUFFER_T testBuffer;
+
 void setUp(void)
 {
+    testBuffer = CBF_BufferNew(int, 4);
 }
 
 void tearDown(void)
 {
+    CBF_BufferDelete(testBuffer);
 }
 
 void test_BufferNew_Returns_PointerToBufferStruct(void)
 {
-    CBF_BUFFER_T testBuffer = CBF_BufferNew(int, 4);
     TEST_ASSERT_NOT_NULL(testBuffer);
-    CBF_BufferDelete(testBuffer);
 }
 
 void test_BufferNew_Should_CreatePointerToBuffer(void)
 {
-    CBF_BUFFER_T testBuffer = CBF_BufferNew(int, 4);
-    int*         ptr        = CBF_BufferPtrGet(testBuffer);
+    int* ptr = CBF_BufferPtrGet(testBuffer);
     TEST_ASSERT_NOT_NULL(ptr);
-    CBF_BufferDelete(testBuffer);
 }
 
 int main(void)
