@@ -1,5 +1,5 @@
-test/test_generic_circular_buffer.c:12:test_Template:IGNORE: Ignored test
+test/test_generic_circular_buffer.c:22:test_BufferNew_Returns_PointerToBuffer:PASS
 
 -----------------------
-1 Tests 0 Failures 1 Ignored 
+1 Tests 0 Failures 0 Ignored 
 OK

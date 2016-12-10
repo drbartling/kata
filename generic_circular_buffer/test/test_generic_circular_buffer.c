@@ -1,19 +1,24 @@
 
-#include "unity.h"
 #include "generic_circular_buffer.h"
+#include "unity.h"
 
-void setUp(void) {
+void setUp(void)
+{
 }
 
-void tearDown(void) {
+void tearDown(void)
+{
 }
 
-void test_Template(void) {
-    TEST_IGNORE_MESSAGE("Ignored test");
+void test_BufferNew_Returns_PointerToBufferStruct(void)
+{
+    CBF_BUFFER_T testBuffer = CBF_BufferNew(int, 4);
+    TEST_ASSERT_NOT_NULL(testBuffer);
 }
 
-int main(void) {
+int main(void)
+{
     UNITY_BEGIN();
-    RUN_TEST(test_Template);
+    RUN_TEST(test_BufferNew_Returns_PointerToBufferStruct);
     return UNITY_END();
 }

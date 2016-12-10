@@ -51,7 +51,7 @@ TGT  = $(PATHB)test$(TARGET_EXTENSION)
 RESULTS = $(PATHB)results.txt
 
 #Tool Definitions
-C_COMPILER = gcc
+C_COMPILER = clang
 CFLAGS  = -std=c99
 CFLAGS += -D TEST
 
