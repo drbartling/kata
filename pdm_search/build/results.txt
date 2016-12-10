@@ -1,0 +1,17 @@
+test/test_pdm_search.c:235:test_Shift_returns_nextSequenceStep_when_GivenSizeThreeTaps:PASS
+test/test_pdm_search.c:236:test_PhaseShift_returns_GivenSequence_when_shiftIsZero:PASS
+test/test_pdm_search.c:238:test_PhaseShift_returns_RightShiftedSequence_when_shiftIsGreaterThan0:PASS
+test/test_pdm_search.c:239:test_PhaseShift_CanUseGivenArrayAsTheReturnArray:PASS
+test/test_pdm_search.c:241:test_PhaseShift_returns_RightShiftedSequence_when_shift_IsLessThan0:PASS
+test/test_pdm_search.c:242:test_PhaseShift_CanShiftByLargeNegativeValues:PASS
+test/test_pdm_search.c:244:test_PhaseAmplitude_Returns_SameResultAs_PhaseShift_when_GivenOnePhase:PASS
+test/test_pdm_search.c:245:test_PhaseAmplitudeCombinations:PASS
+test/test_pdm_search.c:246:test_AmplitudesListGet_returns_ListOfUniqueValuesForAmplitudes:PASS
+test/test_pdm_search.c:247:test_PhaseScore:PASS
+test/test_pdm_search.c:248:test_PhaseBestScore:PASS
+test/test_pdm_search.c:249:test_ShiftNext_Should_ReturnFalse_when_NoNextShiftRemains:PASS
+test/test_pdm_search.c:250:test_ShiftNext_should_InitializeToFirstShift:PASS
+
+-----------------------
+13 Tests 0 Failures 0 Ignored 
+OK
