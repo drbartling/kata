@@ -20,6 +20,8 @@
 struct CBF_BUFFER_S
 {
     void* buffer;
+    void* write;
+    void* read;
 };
 
 //
@@ -47,6 +49,8 @@ _CBF_BufferNew(size_t typeSize, size_t count)
 {
     CBF_BUFFER_T newBuffer = malloc(sizeof(struct CBF_BUFFER_S));
     newBuffer->buffer      = malloc(typeSize * count);
+    newBuffer->write       = newBuffer->buffer;
+    newBuffer->read        = newBuffer->buffer;
     return newBuffer;
 }
 
@@ -56,9 +60,26 @@ void CBF_BufferDelete(CBF_BUFFER_T circularBuffer)
     free(circularBuffer);
 }
 
-void* CBF_BufferPtrGet(CBF_BUFFER_T circularBuffer)
+int CBF_ElementRead(CBF_BUFFER_T buffer)
 {
-    return circularBuffer->buffer;
+    int* ptr  = buffer->read;
+    int  data = *ptr;
+    ptr++;
+    buffer->read = ptr;
+    return data;
+}
+
+void CBF_ElementWrite(CBF_BUFFER_T buffer, int data)
+{
+    int* ptr = buffer->write;
+    *ptr     = data;
+    ptr++;
+    buffer->write = ptr;
+}
+
+bool CBF_IsEmpty(CBF_BUFFER_T buffer)
+{
+    return buffer->write == buffer->read;
 }
 
 //

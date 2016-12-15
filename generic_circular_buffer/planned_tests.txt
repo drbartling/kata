@@ -4,9 +4,10 @@ CBF_New
     Arguments
         Element count
         Type
-    Allocates structure
-    Allocates buffer
-    Returns pointer to structure
+-   Allocates structure
+-   Allocates buffer
+-   Returns pointer to structure
+    Initializes read write pointer to start of buffer
     Returns null if can't allocate structure
     Frees structure and returns null if can't allocate buffer
 
@@ -32,3 +33,12 @@ CBF_ElementWrite
 
 CBF_ElementRead
     Reads and removes (deques) an element from the buffer
+
+CBF_IsEmpty
+-    Returns true when buffer is empty
+    Returns false when not empty
+
+CBF_IsFull
+    Returns true when buffer is full
+    Returns false when buffer is not full
+

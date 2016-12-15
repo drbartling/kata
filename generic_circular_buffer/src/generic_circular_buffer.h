@@ -32,7 +32,9 @@ typedef struct CBF_BUFFER_S* CBF_BUFFER_T;
 
 CBF_BUFFER_T _CBF_BufferNew(size_t typeSize, size_t count);
 void CBF_BufferDelete(CBF_BUFFER_T);
-void* CBF_BufferPtrGet(CBF_BUFFER_T buffer);
+int CBF_ElementRead(CBF_BUFFER_T buffer);
+void CBF_ElementWrite(CBF_BUFFER_T buffer, int data);
+bool CBF_IsEmpty(CBF_BUFFER_T buffer);
 
 #endif
 
