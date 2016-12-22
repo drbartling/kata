@@ -1,13 +1,7 @@
 
+#include "cbf_struct.h"
 #include "generic_circular_buffer.h"
 #include "unity.h"
-
-struct CBF_BUFFER_S
-{
-    void* buffer;
-    void* write;
-    void* read;
-};
 
 static CBF_BUFFER_T testBuffer;
 
@@ -58,8 +52,7 @@ void test_ElementRead_and_ElementWrite_workTogether_to_readAndWriteData(void)
     TEST_ASSERT_EQUAL(41, CBF_ElementRead(testBuffer));
 }
 
-void test_ElementRead_and_ElementWrite_workTogether_to_readAndWriteMultipleValues(
-      void)
+void test_ElementRead_and_Write_workTogether_with_MultipleValues(void)
 {
     int dataArray[3] = {32, 65, 4444};
     for (int i = 0; i < 3; ++i)
@@ -76,6 +69,18 @@ void test_ElementRead_and_ElementWrite_workTogether_to_readAndWriteMultipleValue
     TEST_ASSERT_EQUAL_INT_ARRAY(dataArray, readArray, 3);
 }
 
+void test_ElementRead_and_Write_canHandleManyManyValues(void)
+{
+    int dataArray[50000] = {-1000, 1000, 42, 9283, -9278};
+    int readArray[50000] = {0};
+    for (int i = 0; i < 50000; ++i)
+    {
+        CBF_ElementWrite(testBuffer, dataArray[i]);
+        readArray[i] = CBF_ElementRead(testBuffer);
+    }
+    TEST_ASSERT_EQUAL_INT_ARRAY(dataArray, readArray, 50000);
+}
+
 int main(void)
 {
     UNITY_BEGIN();
@@ -87,8 +92,7 @@ int main(void)
     RUN_TEST(test_IsEmpty_should_returnFalse_when_bufferIsNotEmpty);
     RUN_TEST(
           test_ElementRead_and_ElementWrite_workTogether_to_readAndWriteData);
-    RUN_TEST(
-          test_ElementRead_and_ElementWrite_workTogether_to_readAndWriteMultipleValues);
-
+    RUN_TEST(test_ElementRead_and_Write_workTogether_with_MultipleValues);
+    RUN_TEST(test_ElementRead_and_Write_canHandleManyManyValues);
     return UNITY_END();
 }
