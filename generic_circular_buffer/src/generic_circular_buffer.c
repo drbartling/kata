@@ -30,15 +30,15 @@
 // Section: Static Function Prototypes
 //
 
-int* CBF_PointerIncrement(CBF_BUFFER_T cbf, int* ptr);
+void* CBF_PointerIncrement(CBF_BUFFER_T cbf, void* ptr);
 
 //
 // Section: Static Function Definitions
 //
 
-int* CBF_PointerIncrement(CBF_BUFFER_T cbf, int* ptr)
+void* CBF_PointerIncrement(CBF_BUFFER_T cbf, void* ptr)
 {
-    ptr++;
+    ptr = ((uint8_t*) ptr) + cbf->elementSize;
     if (ptr == cbf->end)
     {
         ptr = cbf->buffer;
@@ -51,14 +51,14 @@ int* CBF_PointerIncrement(CBF_BUFFER_T cbf, int* ptr)
 //
 
 CBF_BUFFER_T
-_CBF_BufferNew(size_t typeSize, size_t count)
-{
-    CBF_BUFFER_T newBuffer = malloc(sizeof(struct CBF_BUFFER_S));
-    newBuffer->buffer      = malloc(typeSize * count);
-    newBuffer->write       = newBuffer->buffer;
-    newBuffer->read        = newBuffer->buffer;
-    newBuffer->end         = ((int*) newBuffer->buffer) + count;
-    return newBuffer;
+_CBF_BufferNew(size_t typeSize, size_t count) {
+  CBF_BUFFER_T newBuffer = malloc(sizeof(struct CBF_BUFFER_S));
+  newBuffer->buffer = malloc(typeSize * count);
+  newBuffer->write = newBuffer->buffer;
+  newBuffer->read = newBuffer->buffer;
+  newBuffer->end = ((uint8_t*)newBuffer->buffer) + (count * typeSize);
+  newBuffer->elementSize = typeSize;
+  return newBuffer;
 }
 
 void CBF_BufferDelete(CBF_BUFFER_T circularBuffer)
@@ -67,19 +67,23 @@ void CBF_BufferDelete(CBF_BUFFER_T circularBuffer)
     free(circularBuffer);
 }
 
-int CBF_ElementRead(CBF_BUFFER_T cbf)
+void* _CBF_ElementRead(CBF_BUFFER_T cbf)
 {
-    int* ptr  = cbf->read;
-    int  data = *ptr;
+    void* ptr  = cbf->read;
     cbf->read = CBF_PointerIncrement(cbf, ptr);
-    return data;
+    return ptr;
 }
 
-void CBF_ElementWrite(CBF_BUFFER_T cbf, int data)
+void _CBF_ElementWrite(CBF_BUFFER_T cbf, const void *data)
 {
-    int* ptr   = cbf->write;
-    *ptr       = data;
-    cbf->write = CBF_PointerIncrement(cbf, ptr);
+    volatile int *foo = data;
+    uint8_t* ptr   = cbf->write;
+    for (int i = 0; i < cbf->elementSize; ++i)
+    {
+        *ptr++ = *((uint8_t*)data);
+        data = ((uint8_t*)data) + 1;
+    }
+    cbf->write     = CBF_PointerIncrement(cbf, cbf->write);
 }
 
 bool CBF_IsEmpty(CBF_BUFFER_T cbf)

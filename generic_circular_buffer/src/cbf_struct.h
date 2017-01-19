@@ -7,6 +7,7 @@ struct CBF_BUFFER_S
     void* write;
     void* read;
     void* end;
+    int elementSize;
 };
 
 

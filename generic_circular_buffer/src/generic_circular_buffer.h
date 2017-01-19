@@ -15,6 +15,12 @@
 //
 
 #define CBF_BufferNew(type, count) _CBF_BufferNew(sizeof(type), (count))
+#define CBF_ElementRead(type, buffer) *((type*)(_CBF_ElementRead(buffer)))
+#define CBF_ElementWrite(type, buffer, data) \
+  {                                          \
+    type typedData = data;                   \
+    _CBF_ElementWrite(buffer, &typedData);   \
+  }
 
 //
 // Section: Constants
@@ -32,8 +38,8 @@ typedef struct CBF_BUFFER_S* CBF_BUFFER_T;
 
 CBF_BUFFER_T _CBF_BufferNew(size_t typeSize, size_t count);
 void CBF_BufferDelete(CBF_BUFFER_T);
-int CBF_ElementRead(CBF_BUFFER_T buffer);
-void CBF_ElementWrite(CBF_BUFFER_T buffer, int data);
+void* _CBF_ElementRead(CBF_BUFFER_T buffer);
+void _CBF_ElementWrite(CBF_BUFFER_T buffer, const void *data);
 bool CBF_IsEmpty(CBF_BUFFER_T buffer);
 
 #endif
