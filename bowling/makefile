@@ -57,8 +57,8 @@ CFLAGS += -D TEST
 
 INC_DIRS  = -I .
 INC_DIRS += -I $(PATHU)
-INC_DIRS += -I $(PATHS) 
-INC_DIRS += -I $(PATHI) 
+INC_DIRS += -I $(PATHS)
+INC_DIRS += -I $(PATHI)
 
 COMPILE = $(C_COMPILER) -c $(CFLAGS) $(INC_DIRS) $< -o $@
 LINK = $(C_COMPILER) -o $@ $^
@@ -83,7 +83,7 @@ FAILED_TESTS = echo; \
 
 RESULT_SUMMARY = echo; \
 	echo -----------------------------------; \
-	grep -s Ignored ./$(RESULTS)
+	grep -s ".*Tests.*Failures.*Ignored" ./$(RESULTS)
 
 FINAL_RESULT = if grep -q FAIL ./$(RESULTS); \
 	then tput $(RED);   echo ==============FAIL==============; tput $(NO_COLOR); \

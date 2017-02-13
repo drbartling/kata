@@ -47,7 +47,7 @@ void test_GameScore_should_CorrectlyScoreAStrike(void) {
 }
 
 void test_GameScore_should_Return300_when_PerfectGameIsPlayed(void) {
-    BWL_Roll(10, 500);
+    BWL_Roll(10, BWL_ROLL_COUNT_MAX);
 
     TEST_ASSERT_EQUAL(300, BWL_GameScore());
 }

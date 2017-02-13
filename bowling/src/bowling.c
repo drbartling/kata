@@ -8,10 +8,6 @@
 #include <assert.h>
 
 //
-// Section: Constants
-//
-
-//
 // Section: Global Variable Declarations
 //
 
@@ -22,28 +18,20 @@ static uint8_t BWL_rollCount;
 // Section: Macros
 //
 
-#define BWL_FrameBaseScore(roll) \
+#define BWL_FrameBaseScore(roll)                                               \
     (BWL_rollScores[roll] + BWL_rollScores[roll + 1])
 
-#define BWL_SpareScore(roll) \
-    (BWL_PIN_COUNT_MAX + BWL_rollScores[roll + 2])
+#define BWL_SpareScore(roll)                                                   \
+    (BWL_rollScores[roll] + BWL_rollScores[roll + 1] + BWL_rollScores[roll + 2])
 
-#define BWL_FrameIsSpare(roll) \
+#define BWL_FrameIsSpare(roll)                                                 \
     (BWL_PIN_COUNT_MAX == BWL_FrameBaseScore(roll))
 
-#define BWL_FrameIsStrike(roll) \
+#define BWL_FrameIsStrike(roll)                                                \
     (BWL_PIN_COUNT_MAX == BWL_rollScores[roll])
 
-#define BWL_StrikeScore(roll) \
-    (BWL_PIN_COUNT_MAX + BWL_rollScores[roll + 1] + BWL_rollScores[roll + 2])
-
-//
-// Section: Static Function Prototypes
-//
-
-//
-// Section: Static Function Definitions
-//
+#define BWL_StrikeScore(roll)                                                  \
+    (BWL_rollScores[roll] + BWL_rollScores[roll + 1] + BWL_rollScores[roll + 2])
 
 //
 // Section: Bowling APIs
