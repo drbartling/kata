@@ -1,0 +1,7 @@
+test/test_md5.c:79:test_MD5_Hello_Acceptance:PASS
+test/test_md5.c:80:test_PreProcess_Single_block_sized_string:PASS
+test/test_md5.c:81:test_PreProcess_two_block_sized_string:PASS
+
+-----------------------
+3 Tests 0 Failures 0 Ignored 
+OK
