@@ -1,22 +1,10 @@
-//
-// Section: Included Files
-//
-
 #include "bowling.h"
 #include <stdbool.h>
 #include <stdint.h>
 #include <assert.h>
 
-//
-// Section: Global Variable Declarations
-//
-
 static BWL_GAME_SCORE_T BWL_rollScores[BWL_ROLL_COUNT_MAX];
 static uint8_t BWL_rollCount;
-
-//
-// Section: Macros
-//
 
 #define BWL_FrameBaseScore(roll)                                               \
     (BWL_rollScores[roll] + BWL_rollScores[roll + 1])
@@ -32,10 +20,6 @@ static uint8_t BWL_rollCount;
 
 #define BWL_StrikeScore(roll)                                                  \
     (BWL_rollScores[roll] + BWL_rollScores[roll + 1] + BWL_rollScores[roll + 2])
-
-//
-// Section: Bowling APIs
-//
 
 void BWL_GameNew(void) {
     BWL_rollCount = 0;
@@ -66,7 +50,3 @@ void BWL_Roll(BWL_PIN_COUNT_T pinsDown, BWL_ROLL_COUNT_T rolls) {
         BWL_rollCount++;
     }
 }
-
-//
-// End of File
-//
